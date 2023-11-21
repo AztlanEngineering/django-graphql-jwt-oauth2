@@ -89,6 +89,7 @@ class OAuth2LinksProvider(graphene.ObjectType, metaclass=OAuth2LinksProviderMeta
     an OAuth2 provider's authentication link.
     """
 
+
 class OAuth2LinksQuery(graphene.ObjectType):
     """
     GraphQL query class for OAuth2 authentication URLs.

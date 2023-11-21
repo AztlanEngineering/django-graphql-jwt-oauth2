@@ -31,8 +31,8 @@ class GoogleOAuth2Provider(OAuth2Provider):
     """
     OAuth2 provider for Google.
 
-    This class provides methods for OAuth2 authentication flow, including 
-    building authorization URLs, retrieving tokens, fetching user profiles, 
+    This class provides methods for OAuth2 authentication flow, including
+    building authorization URLs, retrieving tokens, fetching user profiles,
     and extracting user data for Google.
 
     Attributes:

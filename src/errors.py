@@ -24,7 +24,7 @@ DEFAULT_ERROR_MESSAGE: str = "Unauthorized"
 DEFAULT_STATUS_CODE: int = 401
 
 
-def ObscureHttpResponse( # pylint: disable=C0103
+def ObscureHttpResponse(  # pylint: disable=C0103
     reason: str = DEFAULT_ERROR_MESSAGE, code: int = DEFAULT_STATUS_CODE
 ) -> HttpResponse:
     """
