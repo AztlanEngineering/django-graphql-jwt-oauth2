@@ -55,5 +55,5 @@ jobs:
     - name: Lint with pylint
       run: |
         # Stop the build if there are Python syntax errors or undefined names
-        pipenv run pylint
+        pipenv run lint
 
