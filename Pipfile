@@ -16,6 +16,8 @@ graphene-django = "*"
 django-graphql-jwt = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
 requests = "*"
+pip = "*"
+install = "*"
 
 [requires]
 python_version = "3.9"
