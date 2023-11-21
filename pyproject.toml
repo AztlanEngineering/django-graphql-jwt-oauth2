@@ -44,6 +44,10 @@ module = "graphql_jwt"
 ignore_errors = true
 #disallow_untyped_defs = true
 
-[tool.pylint."MESSAGES CONTROL"]
-disable = ""
+[tool.pylint."messages-control"]
+max-args = 6
+disable= [
+  "too-few-public-methods",
+  "f-string-without-interpolation" #Does not recognize the inteprolation
+]
 

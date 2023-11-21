@@ -15,13 +15,14 @@ django = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
+requests = "*"
 
 [requires]
 python_version = "3.9"
 
 [scripts]
-format-black = "black ."
-format-isort = "isort ."
-lint = "pylint ."
-type-check = "mypy ."
+format-black = "black ./src"
+format-isort = "isort ./src"
+lint = "pylint ./src"
+type-check = "mypy ./src"
 # PIPENV_DOTENV_LOCATION=$(pwd)/.env.prod

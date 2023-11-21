@@ -1,8 +1,9 @@
 """
 jwt.py
 
-This module handles JWT (JSON Web Token) and refresh token functionalities for the django-graphene-jwt-oauth2 library, 
-including token creation, setting cookies, and token expiration checks.
+This module handles JWT (JSON Web Token) and refresh token functionalities 
+for the django-graphene-jwt-oauth2 library, including token creation, 
+setting cookies, and token expiration checks.
 
 Functions:
 - calculate_expiration: Calculate the expiration time for a token.

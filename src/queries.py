@@ -1,11 +1,13 @@
 """
 queries.py
 
-This module defines GraphQL queries and corresponding object types for the django-graphene-jwt-oauth2 library, 
+This module defines GraphQL queries and corresponding object 
+types for the django-graphene-jwt-oauth2 library, 
 including dynamic generation of OAuth2 provider links.
 
 Classes:
-- OAuth2LinksProviderMetaclass: A metaclass for dynamically generating GraphQL fields for OAuth2 providers.
+- OAuth2LinksProviderMetaclass: A metaclass for dynamically 
+  generating GraphQL fields for OAuth2 providers.
 - OAuth2LinksProvider: GraphQL ObjectType utilizing the metaclass for OAuth2 provider links.
 - OAuth2LinksQuery: GraphQL ObjectType for querying OAuth2 authentication URLs.
 
@@ -15,7 +17,7 @@ Functions:
 Variables:
 - None
 """
-from typing import Any, Dict
+from typing import Any
 
 import json
 
@@ -35,7 +37,7 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
     :param type graphene.ObjectType: Base class for GraphQL object types
     """
 
-    def __new__(cls, name, bases, attrs):
+    def __new__(mcs, name, bases, attrs):
         """
         Dynamically creates fields and resolvers for each provider.
 
@@ -47,14 +49,13 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
         :param attrs: Attributes/dict of the class
         :return: New class object with dynamically added fields and resolvers
         """
+        provider = None
         for provider_name, provider_class in PROVIDER_CLASSES.items():
             field_name = provider_name.lower()
             field_description = f"Login link for {provider_name} authentication"
             provider = provider_class()
 
-            def resolver(
-                parent: Any, info: graphene.ResolveInfo, **kwargs: Dict[str, Any]
-            ) -> str:
+            def resolver(parent: Any, info: graphene.ResolveInfo) -> str:
                 """
                 Resolver for generating OAuth2 login links.
 
@@ -71,15 +72,14 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
                     state_payload.update(additional_state_payload)
 
                 encoded_state = OAuth2StateManager(payload=state_payload).encoded_state
-                a = provider.get_authorization_url(info.context, encoded_state)
-                return a
+                return provider.get_authorization_url(info.context, encoded_state)
 
             attrs[field_name] = graphene.Field(
                 graphene.String, description=field_description, required=True
             )
             attrs[f"resolve_{field_name}"] = resolver
 
-        return super().__new__(cls, name, bases, attrs)
+        return super().__new__(mcs, name, bases, attrs)
 
 
 class OAuth2LinksProvider(graphene.ObjectType, metaclass=OAuth2LinksProviderMetaclass):
@@ -89,9 +89,6 @@ class OAuth2LinksProvider(graphene.ObjectType, metaclass=OAuth2LinksProviderMeta
     Utilizes OAuth2LinksProviderMetaclass for dynamic field generation. Each field represents
     an OAuth2 provider's authentication link.
     """
-
-    pass
-
 
 class OAuth2LinksQuery(graphene.ObjectType):
     """
@@ -116,7 +113,7 @@ class OAuth2LinksQuery(graphene.ObjectType):
         description="Retrieve OAuth2 authentication URLs for various providers",
     )
 
-    def resolve_o_auth2_links(self, info, **kwargs):
+    def resolve_o_auth2_links(self, **kwargs):
         """
         Resolver for the o_auth2_urls query field.
 

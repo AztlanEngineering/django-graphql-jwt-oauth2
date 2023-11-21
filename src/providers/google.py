@@ -1,8 +1,9 @@
 """
 google.py
 
-This module defines the GoogleOAuth2Provider class, a subclass of OAuth2Provider, 
-specifically for handling OAuth2 authentication with Google.
+This module defines the GoogleOAuth2Provider class, a subclass of
+OAuth2Provider, specifically for handling OAuth2 authentication 
+with Google.
 
 Classes:
 - GoogleOAuth2Provider: Provides OAuth2 authentication functionality for Google.
@@ -30,20 +31,21 @@ class GoogleOAuth2Provider(OAuth2Provider):
     """
     OAuth2 provider for Google.
 
-    This class provides methods for OAuth2 authentication flow, including building authorization URLs,
-    retrieving tokens, fetching user profiles, and extracting user data for Google.
+    This class provides methods for OAuth2 authentication flow, including 
+    building authorization URLs, retrieving tokens, fetching user profiles, 
+    and extracting user data for Google.
 
     Attributes:
-        CLIENT_ID (str): The OAuth2 client ID for Google.
-        CLIENT_SECRET (str): The OAuth2 client secret for Google.
+        client_id (str): The OAuth2 client ID for Google.
+        client_secret (str): The OAuth2 client secret for Google.
         name (str): Name of the provider.
         scope (str): The scope of the initial token request.
         config (dict): Configuration for URLs used in the OAuth2 flow.
     """
 
     name = "google"  # Name of the provider
-    CLIENT_ID = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_ID"]
-    CLIENT_SECRET = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_SECRET"]
+    client_id = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_ID"]
+    client_secret = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_SECRET"]
 
     config = {
         "AUTHORIZATION_URL": "https://accounts.google.com/o/oauth2/v2/auth",
@@ -73,7 +75,7 @@ class GoogleOAuth2Provider(OAuth2Provider):
         """
         # local_uri = reverse('oauth2-authorize', kwargs={'provider': self.name})
         query_params = {
-            "client_id": self.CLIENT_ID,
+            "client_id": self.client_id,
             "response_type": "code",
             "scope": " ".join(["openid", "profile", "email"]),
             "redirect_uri": self.get_callback_url(request),
@@ -100,10 +102,11 @@ class GoogleOAuth2Provider(OAuth2Provider):
                     "grant_type": "authorization_code",
                     "code": code,
                     "scope": self.scope,
-                    "client_id": self.CLIENT_ID,
-                    "client_secret": self.CLIENT_SECRET,
+                    "client_id": self.client_id,
+                    "client_secret": self.client_secret,
                     "redirect_uri": self.get_callback_url(request),
                 },
+                timeout=self.timeout,
             )
 
             response.raise_for_status()
@@ -123,6 +126,7 @@ class GoogleOAuth2Provider(OAuth2Provider):
             response = requests.get(
                 self.config["PROFILE_URL"],
                 headers={"Authorization": f"Bearer {access_token}"},
+                timeout=self.timeout,
             )
             response.raise_for_status()
             return response.json()

@@ -1,7 +1,8 @@
 """
 decorators.py
 
-This module provides decorators used in the django-graphene-jwt-oauth2 library to handle OAuth2 callback functionality.
+This module provides decorators used in the django-graphene-jwt-oauth2 library
+to handle OAuth2 callback functionality.
 
 Functions:
 - callback: A decorator to process OAuth2 callback and pass data to the decorated view function.
@@ -44,7 +45,7 @@ def callback(view_func: Callable[..., Any]) -> Callable[..., HttpResponse]:
     ) -> HttpResponse:
         provider_class = PROVIDER_CLASSES.get(provider)
         if not provider_class:
-            return ObscureHttpResponse("Invalid OAuth2 provider").http_response()
+            return ObscureHttpResponse("Invalid OAuth2 provider")
 
         provider_instance = provider_class()
         code = request.GET.get("code")

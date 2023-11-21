@@ -1,8 +1,9 @@
 """
 state_manager.py
 
-This module defines the OAuth2StateManager class for managing the state in OAuth2 authentication processes 
-in the django-graphene-jwt-oauth2 library. This includes encoding and decoding state information.
+This module defines the OAuth2StateManager class for managing the state in OAuth2 authentication
+processes in the django-graphene-jwt-oauth2 library. This includes encoding and decoding state
+information.
 
 Classes:
 - OAuth2StateManager: Manages state during OAuth2 authentication.
@@ -23,15 +24,16 @@ import jwt
 
 class OAuth2StateManager:
     """
-    This class handles the state of OAuth2 authentication processes by encoding and decoding state information
-    using JWT tokens.
+    This class handles the state of OAuth2 authentication processes by encoding and decoding state
+    information using JWT tokens.
 
     Attributes:
         payload (Optional[Dict[str, Any]]): The payload to be encoded or decoded.
         encoded_state (Optional[str]): The encoded state string.
 
     Methods:
-        __init__(**kwargs): Initializes the OAuth2StateManager instance with optional payload or encoded state.
+        __init__(**kwargs): Initializes the OAuth2StateManager instance with optional payload or
+        encoded state.
     """
 
     def __init__(self, **kwargs: Any) -> None:

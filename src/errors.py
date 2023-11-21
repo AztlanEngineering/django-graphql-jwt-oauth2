@@ -1,8 +1,9 @@
 """
 errors.py
 
-This module defines custom error handling for the django-graphene-jwt-oauth2 library, including a custom exception 
-and an HttpResponse subclass to obscure error details in non-debug mode.
+This module defines custom error handling for the django-graphene-jwt-oauth2 library, 
+including a custom exception and an HttpResponse subclass to obscure error 
+details in non-debug mode.
 
 Classes:
 - ObscureException: Custom exception class with an optional message.
@@ -23,7 +24,7 @@ DEFAULT_ERROR_MESSAGE: str = "Unauthorized"
 DEFAULT_STATUS_CODE: int = 401
 
 
-def ObscureHttpResponse(
+def ObscureHttpResponse( # pylint: disable=C0103
     reason: str = DEFAULT_ERROR_MESSAGE, code: int = DEFAULT_STATUS_CODE
 ) -> HttpResponse:
     """
