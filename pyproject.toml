@@ -1,6 +1,6 @@
 [project]
-name = "django-graphene-jwt-oauth2"
-version = "1.0.0"
+name = "django-graphql-jwt-oauth2"
+version = "1.0.1"
 #authors = [
 #  { name="Example Author", email="author@example.com" },
 #]
