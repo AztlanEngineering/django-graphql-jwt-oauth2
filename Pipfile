@@ -1,0 +1,18 @@
+[[source]]            
+url = "https://pypi.org/simple"
+verify_ssl = true     
+name = "pypi"
+
+[dev-packages]
+black = "*"
+isort = "*"
+pylint = "*"
+mypy = "*"
+
+[packages]
+django = "*"
+graphene-django = "*"
+django-graphql-jwt = "*"
+
+[requires]
+python_version = "3.9"
