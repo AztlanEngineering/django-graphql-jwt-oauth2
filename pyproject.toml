@@ -14,8 +14,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/AztlanEngineering/django-graphene-jwt-oauth2"
-Issues = "https://github.com/AztlanEngineering/django-graphene-jwt-oauth2/issues"
+Homepage = "https://github.com/AztlanEngineering/django-graphql-jwt-oauth2"
+Issues = "https://github.com/AztlanEngineering/django-graphql-jwt-oauth2/issues"
 
 [tool.black]
 line-length = 88
