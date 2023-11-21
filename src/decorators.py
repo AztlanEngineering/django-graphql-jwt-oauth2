@@ -34,9 +34,9 @@ def callback(view_func: Callable[..., Any]) -> Callable[..., HttpResponse]:
     and extracting user data from the OAuth2 provider.
 
     :param view_func: The view function to be decorated.
-    :type view_func: callable[..., Any]
+    :type view_func: Callable[..., Any]
     :return: The wrapped view function.
-    :rtype:cCallable[..., HttpResponse]
+    :rtype: Callable[..., HttpResponse]
     """
 
     def wrapped_view(

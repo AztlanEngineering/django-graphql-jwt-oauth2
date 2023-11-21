@@ -13,7 +13,6 @@ Functions:
 Variables:
 - None
 """
-
 from typing import Any, Dict, Optional, Tuple
 
 from django.http import HttpRequest, HttpResponse

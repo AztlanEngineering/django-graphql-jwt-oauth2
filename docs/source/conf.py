@@ -6,8 +6,8 @@ settings.configure(
     SECRET_KEY="test", 
     OAUTH2_CONFIG={
         "GOOGLE":{
-            "CLIENT_ID":"test",
-            "CLIENT_SECRET":"test"
+            "CLIENT_ID":None,
+            "CLIENT_SECRET":None,
         }
     },
     OAUTH2_PROVIDER_CLASSES={

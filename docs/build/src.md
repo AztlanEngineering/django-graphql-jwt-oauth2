@@ -61,11 +61,11 @@ This decorator handles the OAuth2 callback process, validating the received code
 and extracting user data from the OAuth2 provider.
 
 * **Parameters:**
-  **view_func** (*callable**[**...**,* *Any**]*) – The view function to be decorated.
+  **view_func** (*Callable**[**...**,* *Any**]*) – The view function to be decorated.
 * **Returns:**
   The wrapped view function.
-
-:rtype:cCallable[…, HttpResponse]
+* **Return type:**
+  Callable[…, HttpResponse]
 
 ## src.errors module
 
