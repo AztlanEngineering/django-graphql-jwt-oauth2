@@ -14,20 +14,23 @@ Variables:
 - None
 """
 
+from typing import Any, Dict, Optional, Tuple
+from urllib.parse import urlencode
+
 import requests
-from ..provider import OAuth2Provider
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse
-from typing import Tuple, Any, Optional, Dict
-from urllib.parse import urlencode
+
 from ..errors import ObscureHttpResponse
+from ..provider import OAuth2Provider
+
 
 class GoogleOAuth2Provider(OAuth2Provider):
     """
     OAuth2 provider for Google.
 
-    This class provides methods for OAuth2 authentication flow, including building authorization URLs, 
+    This class provides methods for OAuth2 authentication flow, including building authorization URLs,
     retrieving tokens, fetching user profiles, and extracting user data for Google.
 
     Attributes:
@@ -37,17 +40,18 @@ class GoogleOAuth2Provider(OAuth2Provider):
         scope (str): The scope of the initial token request.
         config (dict): Configuration for URLs used in the OAuth2 flow.
     """
-    name = 'google'  # Name of the provider
+
+    name = "google"  # Name of the provider
     CLIENT_ID = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_ID"]
     CLIENT_SECRET = settings.OAUTH2_CONFIG["GOOGLE"]["CLIENT_SECRET"]
 
     config = {
-        "AUTHORIZATION_URL":"https://accounts.google.com/o/oauth2/v2/auth",    
-        "TOKEN_URL":"https://oauth2.googleapis.com/token",
-        "PROFILE_URL":"https://www.googleapis.com/oauth2/v3/userinfo"
+        "AUTHORIZATION_URL": "https://accounts.google.com/o/oauth2/v2/auth",
+        "TOKEN_URL": "https://oauth2.googleapis.com/token",
+        "PROFILE_URL": "https://www.googleapis.com/oauth2/v3/userinfo",
     }
-    scope = 'openid email profile' 
-    
+    scope = "openid email profile"
+
     def get_callback_url(self, request: HttpRequest) -> str:
         """
         Builds the OAuth2 authorization URL for Google using Django's HttpRequest object.
@@ -56,7 +60,7 @@ class GoogleOAuth2Provider(OAuth2Provider):
 
         :return: The absolute URI for OAuth2 authorization.
         """
-        local_uri = reverse('oauth2-callback', kwargs={'provider': self.name})
+        local_uri = reverse("oauth2-callback", kwargs={"provider": self.name})
         return request.build_absolute_uri(local_uri)
 
     def get_authorization_url(self, request: HttpRequest, encoded_state: str) -> str:
@@ -67,17 +71,19 @@ class GoogleOAuth2Provider(OAuth2Provider):
 
         :return: The absolute URI for OAuth2 authorization.
         """
-        #local_uri = reverse('oauth2-authorize', kwargs={'provider': self.name})
+        # local_uri = reverse('oauth2-authorize', kwargs={'provider': self.name})
         query_params = {
-            'client_id': self.CLIENT_ID,
-            'response_type': 'code',
-            'scope': ' '.join(['openid', 'profile', 'email']),
-            'redirect_uri': self.get_callback_url(request),
-            'state':encoded_state
+            "client_id": self.CLIENT_ID,
+            "response_type": "code",
+            "scope": " ".join(["openid", "profile", "email"]),
+            "redirect_uri": self.get_callback_url(request),
+            "state": encoded_state,
         }
         return f"{self.config['AUTHORIZATION_URL']}?{urlencode(query_params)}"
-        
-    def get_oauth2_token(self, code: str, request: HttpRequest) -> Tuple[Optional[Dict[str, Any]], Optional[HttpResponse]]:
+
+    def get_oauth2_token(
+        self, code: str, request: HttpRequest
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[HttpResponse]]:
         """
         Retrieves the OAuth2 token from Google.
 
@@ -89,21 +95,21 @@ class GoogleOAuth2Provider(OAuth2Provider):
         """
         try:
             response = requests.post(
-                self.config['TOKEN_URL'],
+                self.config["TOKEN_URL"],
                 data={
-                    'grant_type': 'authorization_code',
-                    'code': code,
-                    'scope': self.scope,
-                    'client_id': self.CLIENT_ID,
-                    'client_secret': self.CLIENT_SECRET,
-                    'redirect_uri': self.get_callback_url(request),
-                }
+                    "grant_type": "authorization_code",
+                    "code": code,
+                    "scope": self.scope,
+                    "client_id": self.CLIENT_ID,
+                    "client_secret": self.CLIENT_SECRET,
+                    "redirect_uri": self.get_callback_url(request),
+                },
             )
-            
+
             response.raise_for_status()
             return response.json(), None
         except requests.exceptions.RequestException as e:
-            return None, ObscureHttpResponse(f'Error during token retrieval: {str(e)}')
+            return None, ObscureHttpResponse(f"Error during token retrieval: {str(e)}")
 
     def fetch_profile(self, access_token: str) -> Optional[dict]:
         """
@@ -115,13 +121,13 @@ class GoogleOAuth2Provider(OAuth2Provider):
         """
         try:
             response = requests.get(
-                self.config['PROFILE_URL'],
-                headers={'Authorization': f'Bearer {access_token}'}
+                self.config["PROFILE_URL"],
+                headers={"Authorization": f"Bearer {access_token}"},
             )
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException:
-            return None, ObscureHttpResponse(f'Error while fetching the profile')
+            return None, ObscureHttpResponse(f"Error while fetching the profile")
 
     def extract_profile(self, profile: dict) -> dict:
         """
@@ -132,10 +138,9 @@ class GoogleOAuth2Provider(OAuth2Provider):
         :return: Dictionary with extracted user data.
         """
         return {
-            'first_name': profile.get('given_name', None),
-            'last_name': profile.get('family_name', None),
-            'username': profile.get('email'),
-            'email': profile.get('email'),
-            'profile_picture':profile.get("profile", None)
+            "first_name": profile.get("given_name", None),
+            "last_name": profile.get("family_name", None),
+            "username": profile.get("email"),
+            "email": profile.get("email"),
+            "profile_picture": profile.get("profile", None),
         }
-

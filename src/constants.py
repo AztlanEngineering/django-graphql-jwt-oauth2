@@ -15,17 +15,21 @@ Variables:
 - PROVIDER_CLASSES: A dictionary of provider classes, customizable via Django settings.
 """
 
-from typing import Type, Dict
-from .providers.google import GoogleOAuth2Provider
+from typing import Dict, Type
+
 from django.conf import settings
 
-DEFAULT_PROVIDER_CLASSES: Dict[str, Type[GoogleOAuth2Provider]] = {
-    'google': GoogleOAuth2Provider, 
+from .providers.google import GoogleOAuth2Provider
+from .provider import OAuth2Provider
+
+DEFAULT_PROVIDER_CLASSES: Dict[str, Type[OAuth2Provider]] = {
+    "google": GoogleOAuth2Provider,
     # Add other provider classes as needed
 }
 
-if hasattr(settings, 'YOUR_SETTING_NAME'):
-    PROVIDER_CLASSES: Dict[str, Type[GoogleOAuth2Provider]] = getattr(settings, 'PROVIDER_CLASSES')
-else:
-    PROVIDER_CLASSES: Dict[str, Type[GoogleOAuth2Provider]] = DEFAULT_PROVIDER_CLASSES
+PROVIDER_CLASSES = DEFAULT_PROVIDER_CLASSES
 
+if hasattr(settings, "OAUTH2_CONFIG"):
+    PROVIDER_CLASSES: Dict[str, Type[GoogleOAuth2Provider]] = getattr(
+        settings, "PROVIDER_CLASSES"
+    )

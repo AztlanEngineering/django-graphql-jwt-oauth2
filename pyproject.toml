@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)""
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
     "Operating System :: OS Independent",
 ]
 
@@ -20,20 +20,6 @@ Issues = "https://github.com/AztlanEngineering/django-graphene-jwt-oauth2/issues
 [tool.black]
 line-length = 88
 include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
 
 [tool.isort]
 profile = "black"
@@ -45,22 +31,19 @@ use_parentheses = true
 ensure_newline_before_comments = true
 
 [tool.mypy]
-warn_return_any = True
-warn_unused_configs = True
-disallow_untyped_defs = True
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+exclude = [
+  #"django",
+  "graphql_jwt"
+]
 
-[mypy-foo.bar.*]
-disallow_untyped_defs = True
-
-[mypy-foo.bar]
-warn_return_any = False
-
-[mypy-somelibrary]
-ignore_missing_imports = True
+[[tool.mypy.overrides]]
+module = "graphql_jwt"
+ignore_errors = true
+#disallow_untyped_defs = true
 
 [tool.pylint."MESSAGES CONTROL"]
-disable = "C0330, C0326"
-
-[tool.pylint.MASTER]
-jobs = 0
+disable = ""
 

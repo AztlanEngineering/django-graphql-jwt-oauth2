@@ -14,9 +14,12 @@ Variables:
 - None
 """
 
-import jwt
-from typing import Any, Optional, Dict
+from typing import Any, Dict, Optional
+
 from django.conf import settings
+
+import jwt
+
 
 class OAuth2StateManager:
     """
@@ -30,13 +33,17 @@ class OAuth2StateManager:
     Methods:
         __init__(**kwargs): Initializes the OAuth2StateManager instance with optional payload or encoded state.
     """
+
     def __init__(self, **kwargs: Any) -> None:
-        self.payload: Optional[Dict[str, Any]] = kwargs.pop('payload', None)
-        self.encoded_state: Optional[str] = kwargs.pop('encoded_state', None)
+        self.payload: Optional[Dict[str, Any]] = kwargs.pop("payload", None)
+        self.encoded_state: Optional[str] = kwargs.pop("encoded_state", None)
 
         if self.encoded_state:
-            self.payload = jwt.decode(self.encoded_state, settings.SECRET_KEY, algorithms=["HS256"], **kwargs)
+            self.payload = jwt.decode(
+                self.encoded_state, settings.SECRET_KEY, algorithms=["HS256"], **kwargs
+            )
 
         if self.payload:
-            self.encoded_state = jwt.encode(self.payload, settings.SECRET_KEY, algorithm="HS256")
-
+            self.encoded_state = jwt.encode(
+                self.payload, settings.SECRET_KEY, algorithm="HS256"
+            )

@@ -8,11 +8,20 @@ black = "*"
 isort = "*"
 pylint = "*"
 mypy = "*"
+types-requests = "*"
 
 [packages]
 django = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
+django-stubs = {extras = ["compatible-mypy"], version = "*"}
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+format-black = "black ."
+format-isort = "isort ."
+lint = "pylint ."
+type-check = "mypy ."
+# PIPENV_DOTENV_LOCATION=$(pwd)/.env.prod

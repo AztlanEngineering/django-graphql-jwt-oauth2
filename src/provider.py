@@ -14,14 +14,16 @@ Variables:
 - None
 """
 
-from typing import Tuple, Any, Optional, Dict
+from typing import Any, Dict, Optional, Tuple
+
 from django.http import HttpRequest, HttpResponse, JsonResponse
+
 
 class OAuth2Provider:
     """
     Base class for OAuth2 providers.
 
-    This class outlines the necessary methods and attributes for OAuth2 providers. 
+    This class outlines the necessary methods and attributes for OAuth2 providers.
     It acts as a template for specific provider implementations.
 
     Attributes:
@@ -59,7 +61,9 @@ class OAuth2Provider:
         """
         raise NotImplementedError("Subclasses must implement this method")
 
-    def get_oauth2_token(self, code: str, request: HttpRequest) -> Tuple[Optional[Dict[str, Any]], Optional[HttpResponse]]:
+    def get_oauth2_token(
+        self, code: str, request: HttpRequest
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[HttpResponse]]:
         """
         Retrieves the OAuth2 token from the provider.
 
@@ -90,4 +94,3 @@ class OAuth2Provider:
         :return: Dictionary with extracted user data.
         """
         raise NotImplementedError("Subclasses must implement this method")
-

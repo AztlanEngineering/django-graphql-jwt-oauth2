@@ -15,11 +15,15 @@ Functions:
 Variables:
 - None
 """
+from typing import Any, Dict
+
+import json
 
 import graphene
-import json
+
 from .constants import PROVIDER_CLASSES
 from .state_manager import OAuth2StateManager
+
 
 class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
     """
@@ -45,11 +49,12 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
         """
         for provider_name, provider_class in PROVIDER_CLASSES.items():
             field_name = provider_name.lower()
-            field_description = f'Login link for {provider_name} authentication'
+            field_description = f"Login link for {provider_name} authentication"
             provider = provider_class()
 
-            def resolver(parent: Any, info: graphene.ResolveInfo, **kwargs: Dict[str, Any]) -> str:
-
+            def resolver(
+                parent: Any, info: graphene.ResolveInfo, **kwargs: Dict[str, Any]
+            ) -> str:
                 """
                 Resolver for generating OAuth2 login links.
 
@@ -58,10 +63,10 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
                 :param kwargs: Keyword arguments
                 :return: Authorization URL for the OAuth2 provider
                 """
-                print('being called')
-                state_payload = {'resource': parent.get('resource')}
-                additional_state_payload_json = parent.get('additional_state_payload')
-                if additional_state_payload_json: 
+                print("being called")
+                state_payload = {"resource": parent.get("resource")}
+                additional_state_payload_json = parent.get("additional_state_payload")
+                if additional_state_payload_json:
                     additional_state_payload = json.loads(additional_state_payload_json)
                     state_payload.update(additional_state_payload)
 
@@ -70,12 +75,12 @@ class OAuth2LinksProviderMetaclass(type(graphene.ObjectType)):
                 return a
 
             attrs[field_name] = graphene.Field(
-                graphene.String,
-                description=field_description,
-                required=True)
-            attrs[f'resolve_{field_name}'] = resolver
+                graphene.String, description=field_description, required=True
+            )
+            attrs[f"resolve_{field_name}"] = resolver
 
         return super().__new__(cls, name, bases, attrs)
+
 
 class OAuth2LinksProvider(graphene.ObjectType, metaclass=OAuth2LinksProviderMetaclass):
     """
@@ -84,7 +89,9 @@ class OAuth2LinksProvider(graphene.ObjectType, metaclass=OAuth2LinksProviderMeta
     Utilizes OAuth2LinksProviderMetaclass for dynamic field generation. Each field represents
     an OAuth2 provider's authentication link.
     """
+
     pass
+
 
 class OAuth2LinksQuery(graphene.ObjectType):
     """
@@ -94,11 +101,19 @@ class OAuth2LinksQuery(graphene.ObjectType):
 
     :ivar o_auth2_urls: Field to query OAuth2 authentication URLs
     """
+
     o_auth2_links = graphene.Field(
         OAuth2LinksProvider,
-        resource=graphene.Argument(graphene.String, required=True, description='Resource identifier for the OAuth2 provider'),
-        additional_state_payload=graphene.Argument(graphene.String, description='Additional state payload for OAuth2 authentication'),
-        description='Retrieve OAuth2 authentication URLs for various providers'
+        resource=graphene.Argument(
+            graphene.String,
+            required=True,
+            description="Resource identifier for the OAuth2 provider",
+        ),
+        additional_state_payload=graphene.Argument(
+            graphene.String,
+            description="Additional state payload for OAuth2 authentication",
+        ),
+        description="Retrieve OAuth2 authentication URLs for various providers",
     )
 
     def resolve_o_auth2_links(self, info, **kwargs):
@@ -110,4 +125,3 @@ class OAuth2LinksQuery(graphene.ObjectType):
         :return: Dictionary containing the requested data
         """
         return kwargs
-
