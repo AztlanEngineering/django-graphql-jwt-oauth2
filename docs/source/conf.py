@@ -2,7 +2,18 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
 from django.conf import settings
-settings.configure()
+settings.configure(
+    SECRET_KEY="test", 
+    OAUTH2_CONFIG={
+        "GOOGLE":{
+            "CLIENT_ID":"test",
+            "CLIENT_SECRET":"test"
+        }
+    },
+    OAUTH2_PROVIDER_CLASSES={
+
+    }
+)
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:

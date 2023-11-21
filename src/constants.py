@@ -31,5 +31,5 @@ PROVIDER_CLASSES = DEFAULT_PROVIDER_CLASSES
 
 if hasattr(settings, "OAUTH2_CONFIG"):
     PROVIDER_CLASSES: Dict[str, Type[GoogleOAuth2Provider]] = getattr(
-        settings, "PROVIDER_CLASSES"
+        settings, "OAUTH2_PROVIDER_CLASSES"
     )
