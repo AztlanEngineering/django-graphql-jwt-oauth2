@@ -18,6 +18,8 @@ django-stubs = {extras = ["compatible-mypy"], version = "*"}
 requests = "*"
 pip = "*"
 install = "*"
+sphinx = "*"
+sphinx-markdown-builder = "*"
 
 [requires]
 python_version = "3.9"
@@ -27,4 +29,6 @@ format-black = "black ./src"
 format-isort = "isort ./src"
 lint = "pylint ./src"
 type-check = "mypy ./src"
+apidoc = "sphinx-apidoc ./src -o ./docs/source"
+sphinx = "sphinx-build -c ./docs/source -b markdown ./docs/source ./docs/build"
 # PIPENV_DOTENV_LOCATION=$(pwd)/.env.prod

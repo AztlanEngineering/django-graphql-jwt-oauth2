@@ -4,6 +4,6 @@ on:
     branches:
       - '*'
 
-jobs:                                                
-  test:                                      
+jobs:
+  test: 
     uses: ./.github/workflows/_template.test.yaml
