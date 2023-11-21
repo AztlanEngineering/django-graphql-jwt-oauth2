@@ -17,9 +17,8 @@ Functions:
 Variables:
 - None
 """
-from typing import Any
-
 import json
+from typing import Any
 
 import graphene
 

@@ -19,8 +19,8 @@ from typing import Dict, Type
 
 from django.conf import settings
 
-from .providers.google import GoogleOAuth2Provider
 from .provider import OAuth2Provider
+from .providers.google import GoogleOAuth2Provider
 
 DEFAULT_PROVIDER_CLASSES: Dict[str, Type[OAuth2Provider]] = {
     "google": GoogleOAuth2Provider,

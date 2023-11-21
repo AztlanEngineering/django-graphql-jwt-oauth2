@@ -16,11 +16,10 @@ Variables:
 
 from typing import Any, Callable
 
+import jwt
 from django.http import HttpRequest, HttpResponse
 from django.middleware.csrf import rotate_token
 from graphql_jwt.settings import jwt_settings
-
-import jwt
 
 from .constants import PROVIDER_CLASSES
 from .errors import ObscureHttpResponse

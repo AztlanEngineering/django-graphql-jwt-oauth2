@@ -17,9 +17,8 @@ Variables:
 
 from typing import Any, Dict, Optional
 
-from django.conf import settings
-
 import jwt
+from django.conf import settings
 
 
 class OAuth2StateManager:
