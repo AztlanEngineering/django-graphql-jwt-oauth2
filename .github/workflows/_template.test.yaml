@@ -39,12 +39,12 @@ jobs:
     - name: Lint with isort
       run: |
         # Stop the build if there are import formatting issues
-        pipenv run isort . --check --diff --profile black
+        pipenv run format-isort --check --diff --profile black
 
     - name: Lint with black
       run: |
         # Stop the build if there are Python formatting/style issues
-        pipenv run black --check --diff .
+        pipenv run format-black --check --diff .
 
     #- name: Lint with mypy
       #run: |

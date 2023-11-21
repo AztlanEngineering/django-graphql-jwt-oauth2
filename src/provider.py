@@ -18,6 +18,7 @@ from typing import Any, Dict, Optional, Tuple
 
 from django.http import HttpRequest, HttpResponse
 
+
 class OAuth2Provider:
     """
     Base class for OAuth2 providers.
