@@ -113,7 +113,7 @@ class OAuth2LinksQuery(graphene.ObjectType):
         description="Retrieve OAuth2 authentication URLs for various providers",
     )
 
-    def resolve_o_auth2_links(self, **kwargs):
+    def resolve_o_auth2_links(self, info: graphene.ResolveInfo, **kwargs):
         """
         Resolver for the o_auth2_urls query field.
 
