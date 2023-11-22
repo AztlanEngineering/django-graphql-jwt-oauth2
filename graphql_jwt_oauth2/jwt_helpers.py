@@ -55,7 +55,8 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
         jwt_settings.JWT_COOKIE_NAME,
         token,
         expires=jwt_expires,
-        httponly=jwt_settings.JWT_COOKIE_SECURE,
+        secure=jwt_settings.JWT_COOKIE_SECURE,
+        httponly=True,
     )
 
     # Refresh Token with Model Instance
@@ -68,7 +69,8 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
             jwt_settings.JWT_REFRESH_TOKEN_COOKIE_NAME,
             refresh_token_instance.get_token(),
             expires=refresh_expires,
-            httponly=jwt_settings.JWT_COOKIE_SECURE,
+            secure=jwt_settings.JWT_COOKIE_SECURE,
+            httponly=True,
         )
 
     # HTTP Headers for Expirations
