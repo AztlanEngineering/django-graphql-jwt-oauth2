@@ -1,8 +1,8 @@
-# src.providers package
+# graphql_jwt_oauth2.providers package
 
 ## Submodules
 
-## src.providers.google module
+## graphql_jwt_oauth2.providers.google module
 
 google.py
 
@@ -19,9 +19,9 @@ Functions:
 Variables:
 - None
 
-### *class* src.providers.google.GoogleOAuth2Provider(client_id: str | None = None, client_secret: str | None = None, scope: str | None = None, config: Dict | None = None, timeout: int | None = None)
+### *class* graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider(client_id: str | None = None, client_secret: str | None = None, scope: str | None = None, config: Dict | None = None, timeout: int | None = None)
 
-Bases: [`OAuth2Provider`](src.md#src.provider.OAuth2Provider)
+Bases: [`OAuth2Provider`](graphql_jwt_oauth2.md#graphql_jwt_oauth2.provider.OAuth2Provider)
 
 OAuth2 provider for Google.
 
@@ -36,9 +36,9 @@ Attributes:
   scope (str): The scope of the initial token request.
   config (dict): Configuration for URLs used in the OAuth2 flow.
 
-#### client_id *= 'test'*
+#### client_id *= None*
 
-#### client_secret *= 'test'*
+#### client_secret *= None*
 
 #### config *= {'AUTHORIZATION_URL': 'https://accounts.google.com/o/oauth2/v2/auth', 'PROFILE_URL': 'https://www.googleapis.com/oauth2/v3/userinfo', 'TOKEN_URL': 'https://oauth2.googleapis.com/token'}*
 

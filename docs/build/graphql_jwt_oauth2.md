@@ -1,26 +1,26 @@
-# src package
+# graphql_jwt_oauth2 package
 
 ## Subpackages
 
-* [src.providers package](src.providers.md)
-  * [Submodules](src.providers.md#submodules)
-  * [src.providers.google module](src.providers.md#module-src.providers.google)
-    * [`GoogleOAuth2Provider`](src.providers.md#src.providers.google.GoogleOAuth2Provider)
-      * [`GoogleOAuth2Provider.client_id`](src.providers.md#src.providers.google.GoogleOAuth2Provider.client_id)
-      * [`GoogleOAuth2Provider.client_secret`](src.providers.md#src.providers.google.GoogleOAuth2Provider.client_secret)
-      * [`GoogleOAuth2Provider.config`](src.providers.md#src.providers.google.GoogleOAuth2Provider.config)
-      * [`GoogleOAuth2Provider.extract_profile()`](src.providers.md#src.providers.google.GoogleOAuth2Provider.extract_profile)
-      * [`GoogleOAuth2Provider.fetch_profile()`](src.providers.md#src.providers.google.GoogleOAuth2Provider.fetch_profile)
-      * [`GoogleOAuth2Provider.get_authorization_url()`](src.providers.md#src.providers.google.GoogleOAuth2Provider.get_authorization_url)
-      * [`GoogleOAuth2Provider.get_callback_url()`](src.providers.md#src.providers.google.GoogleOAuth2Provider.get_callback_url)
-      * [`GoogleOAuth2Provider.get_oauth2_token()`](src.providers.md#src.providers.google.GoogleOAuth2Provider.get_oauth2_token)
-      * [`GoogleOAuth2Provider.name`](src.providers.md#src.providers.google.GoogleOAuth2Provider.name)
-      * [`GoogleOAuth2Provider.scope`](src.providers.md#src.providers.google.GoogleOAuth2Provider.scope)
-  * [Module contents](src.providers.md#module-src.providers)
+* [graphql_jwt_oauth2.providers package](graphql_jwt_oauth2.providers.md)
+  * [Submodules](graphql_jwt_oauth2.providers.md#submodules)
+  * [graphql_jwt_oauth2.providers.google module](graphql_jwt_oauth2.providers.md#module-graphql_jwt_oauth2.providers.google)
+    * [`GoogleOAuth2Provider`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider)
+      * [`GoogleOAuth2Provider.client_id`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.client_id)
+      * [`GoogleOAuth2Provider.client_secret`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.client_secret)
+      * [`GoogleOAuth2Provider.config`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.config)
+      * [`GoogleOAuth2Provider.extract_profile()`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.extract_profile)
+      * [`GoogleOAuth2Provider.fetch_profile()`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.fetch_profile)
+      * [`GoogleOAuth2Provider.get_authorization_url()`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.get_authorization_url)
+      * [`GoogleOAuth2Provider.get_callback_url()`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.get_callback_url)
+      * [`GoogleOAuth2Provider.get_oauth2_token()`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.get_oauth2_token)
+      * [`GoogleOAuth2Provider.name`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.name)
+      * [`GoogleOAuth2Provider.scope`](graphql_jwt_oauth2.providers.md#graphql_jwt_oauth2.providers.google.GoogleOAuth2Provider.scope)
+  * [Module contents](graphql_jwt_oauth2.providers.md#module-graphql_jwt_oauth2.providers)
 
 ## Submodules
 
-## src.constants module
+## graphql_jwt_oauth2.constants module
 
 constants.py
 
@@ -37,7 +37,7 @@ Variables:
 - DEFAULT_PROVIDER_CLASSES: A dictionary mapping provider names to their respective classes.
 - PROVIDER_CLASSES: A dictionary of provider classes, customizable via Django settings.
 
-## src.decorators module
+## graphql_jwt_oauth2.decorators module
 
 decorators.py
 
@@ -53,7 +53,7 @@ Classes:
 Variables:
 - None
 
-### src.decorators.callback(view_func: Callable[[...], Any])
+### graphql_jwt_oauth2.decorators.callback(view_func: Callable[[...], Any])
 
 Decorator to process OAuth2 callback and pass data to the decorated view function.
 
@@ -67,7 +67,7 @@ and extracting user data from the OAuth2 provider.
 * **Return type:**
   Callable[…, HttpResponse]
 
-## src.errors module
+## graphql_jwt_oauth2.errors module
 
 errors.py
 
@@ -85,7 +85,7 @@ Variables:
 - DEFAULT_ERROR_MESSAGE: Default error message used in non-debug mode.
 - DEFAULT_STATUS_CODE: Default status code for obscured HTTP responses.
 
-### *exception* src.errors.ObscureException(message: str = 'Unauthorized')
+### *exception* graphql_jwt_oauth2.errors.ObscureException(message: str = 'Unauthorized')
 
 Bases: `Exception`
 
@@ -97,7 +97,7 @@ providing a generic error message.
 * **Parameters:**
   **message** – The exception message.
 
-### src.errors.ObscureHttpResponse(reason: str = 'Unauthorized', code: int = 401)
+### graphql_jwt_oauth2.errors.ObscureHttpResponse(reason: str = 'Unauthorized', code: int = 401)
 
 Create an HTTP response with the provided reason and status code or defaults,
 obscuring the error details in non-debug mode.
@@ -108,7 +108,7 @@ obscuring the error details in non-debug mode.
 * **Returns:**
   The HTTP response with obscured details.
 
-## src.jwt_helpers module
+## graphql_jwt_oauth2.jwt_helpers module
 
 jwt.py
 
@@ -127,7 +127,7 @@ Classes:
 Variables:
 - None
 
-### src.jwt_helpers.calculate_expiration(delta: timedelta)
+### graphql_jwt_oauth2.jwt_helpers.calculate_expiration(delta: timedelta)
 
 Calculate the expiration time based on the provided timedelta.
 
@@ -138,7 +138,7 @@ Calculate the expiration time based on the provided timedelta.
 * **Return type:**
   datetime
 
-### src.jwt_helpers.is_refresh_token_expired(refresh_token: str, request: HttpRequest)
+### graphql_jwt_oauth2.jwt_helpers.is_refresh_token_expired(refresh_token: str, request: HttpRequest)
 
 Check if the provided refresh token is expired.
 
@@ -150,7 +150,7 @@ Check if the provided refresh token is expired.
 * **Return type:**
   bool
 
-### src.jwt_helpers.set_cookies(response: HttpResponse, user: Any)
+### graphql_jwt_oauth2.jwt_helpers.set_cookies(response: HttpResponse, user: Any)
 
 Set JWT and refresh token cookies on the HttpResponse object with CSRF rotation.
 
@@ -158,7 +158,7 @@ Set JWT and refresh token cookies on the HttpResponse object with CSRF rotation.
   * **response** (*HttpResponse*) – HttpResponse object for setting cookies, headers, and CSRF rotation.
   * **user** (*Any*) – User instance for generating JWT and refresh tokens.
 
-## src.provider module
+## graphql_jwt_oauth2.provider module
 
 provider.py
 
@@ -174,7 +174,7 @@ Functions:
 Variables:
 - None
 
-### *class* src.provider.OAuth2Provider(client_id: str | None = None, client_secret: str | None = None, scope: str | None = None, config: Dict | None = None, timeout: int | None = None)
+### *class* graphql_jwt_oauth2.provider.OAuth2Provider(client_id: str | None = None, client_secret: str | None = None, scope: str | None = None, config: Dict | None = None, timeout: int | None = None)
 
 Bases: `object`
 
@@ -258,7 +258,7 @@ Retrieves the OAuth2 token from the provider.
 
 #### timeout *= 10*
 
-## src.queries module
+## graphql_jwt_oauth2.queries module
 
 queries.py
 
@@ -279,7 +279,7 @@ Functions:
 Variables:
 - None
 
-### *class* src.queries.OAuth2LinksProvider
+### *class* graphql_jwt_oauth2.queries.OAuth2LinksProvider(google: Any = None)
 
 Bases: `InterObjectType`, `ObjectType`
 
@@ -288,7 +288,20 @@ GraphQL ObjectType for OAuth2LinksProvider.
 Utilizes OAuth2LinksProviderMetaclass for dynamic field generation. Each field represents
 an OAuth2 provider’s authentication link.
 
-### *class* src.queries.OAuth2LinksProviderMetaclass(name, bases, attrs)
+#### google *= <graphene.types.field.Field object>*
+
+#### resolve_google(info: GraphQLResolveInfo)
+
+Resolver for generating OAuth2 login links.
+
+* **Parameters:**
+  * **self** – Instance of the class
+  * **info** – GraphQL query information
+  * **kwargs** – Keyword arguments
+* **Returns:**
+  Authorization URL for the OAuth2 provider
+
+### *class* graphql_jwt_oauth2.queries.OAuth2LinksProviderMetaclass(name, bases, attrs)
 
 Bases: `ObjectTypeMeta`
 
@@ -300,7 +313,7 @@ for various OAuth2 providers based on PROVIDER_CLASSES.
 * **Parameters:**
   **graphene.ObjectType** (*type*) – Base class for GraphQL object types
 
-### *class* src.queries.OAuth2LinksQuery(o_auth2_links: Any = None)
+### *class* graphql_jwt_oauth2.queries.OAuth2LinksQuery(o_auth2_links: Any = None)
 
 Bases: `InterObjectType`, `ObjectType`
 
@@ -323,7 +336,7 @@ Resolver for the o_auth2_urls query field.
 * **Returns:**
   Dictionary containing the requested data
 
-## src.state_manager module
+## graphql_jwt_oauth2.state_manager module
 
 state_manager.py
 
@@ -340,7 +353,7 @@ Functions:
 Variables:
 - None
 
-### *class* src.state_manager.OAuth2StateManager(\*\*kwargs: Any)
+### *class* graphql_jwt_oauth2.state_manager.OAuth2StateManager(\*\*kwargs: Any)
 
 Bases: `object`
 
