@@ -57,7 +57,6 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
         token,
         jwt_expires,
     )
-ame
     # Refresh Token with Model Instance
     if jwt_settings.JWT_ALLOW_REFRESH:
         refresh_token_instance = create_refresh_token(user)
