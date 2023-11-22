@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: django-graphql-jwt-oauth2
+Version: 1.0.1
+Summary: An extension to django-graphene-jwt to allow oauth2 authentication to a Django app.
+Project-URL: Homepage, https://github.com/AztlanEngineering/django-graphql-jwt-oauth2
+Project-URL: Issues, https://github.com/AztlanEngineering/django-graphql-jwt-oauth2/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+TODO
+- Make sure Sphinx generates docs from all files
+- generate html instead of md ???
+- add general introduction and usage guide on the docs

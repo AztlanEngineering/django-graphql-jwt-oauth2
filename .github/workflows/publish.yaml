@@ -30,7 +30,7 @@ jobs:
 
     - name: Install tools
       run: |
-        python -m pip install --upgrade pip pipenv wheel build
+        python -m pip install --upgrade pip pipenv wheel hatch #build
 
     - id: cache-pipenv
       uses: actions/cache@v1
@@ -46,7 +46,7 @@ jobs:
 
     - name: build
       run: |
-        python -m build
+        python -m hatch build
 
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1

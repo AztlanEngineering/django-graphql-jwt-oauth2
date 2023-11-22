@@ -1,6 +1,6 @@
 [project]
 name = "django-graphql-jwt-oauth2"
-version = "1.0.1"
+version = "1.0.5"
 #authors = [
 #  { name="Example Author", email="author@example.com" },
 #]
@@ -51,3 +51,23 @@ disable= [
   "f-string-without-interpolation" #Does not recognize the inteprolation
 ]
 
+
+[tool.hatch]
+
+[tool.hatch.build.targets.sdist]
+packages = ["graphql_jwt_oauth2"]
+exclude = [
+  "/.github",
+  "/docs",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["graphql_jwt_oauth2"]
+exclude = [
+  "/.github",
+  "/docs",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
