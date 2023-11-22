@@ -23,7 +23,7 @@ from typing import Any
 from django.http import HttpRequest, HttpResponse
 from graphql_jwt.refresh_token.shortcuts import create_refresh_token, get_refresh_token
 from graphql_jwt.settings import jwt_settings
-from graphql_jwt.utils import jwt_encode, jwt_payload
+from graphql_jwt.utils import jwt_encode, jwt_payload, set_cookie
 
 
 def calculate_expiration(delta: timedelta) -> datetime:
@@ -51,26 +51,24 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
     payload = jwt_payload(user)
     token = jwt_encode(payload)
     jwt_expires = calculate_expiration(jwt_settings.JWT_EXPIRATION_DELTA)
-    response.set_cookie(
+    set_cookie(
+        response,
         jwt_settings.JWT_COOKIE_NAME,
         token,
-        expires=jwt_expires,
-        secure=jwt_settings.JWT_COOKIE_SECURE,
-        httponly=True,
+        jwt_expires,
     )
-
+ame
     # Refresh Token with Model Instance
     if jwt_settings.JWT_ALLOW_REFRESH:
         refresh_token_instance = create_refresh_token(user)
         refresh_expires = calculate_expiration(
             jwt_settings.JWT_REFRESH_EXPIRATION_DELTA
         )
-        response.set_cookie(
+        set_cookie(
+            response,
             jwt_settings.JWT_REFRESH_TOKEN_COOKIE_NAME,
             refresh_token_instance.get_token(),
-            expires=refresh_expires,
-            secure=jwt_settings.JWT_COOKIE_SECURE,
-            httponly=True,
+            refresh_expires,
         )
 
     # HTTP Headers for Expirations
