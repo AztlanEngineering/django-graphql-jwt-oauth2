@@ -70,11 +70,6 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
             refresh_expires,
         )
 
-    # HTTP Headers for Expirations
-    response["HTTP_JWT_EXPIRATION"] = jwt_expires.timestamp()
-    if jwt_settings.JWT_ALLOW_REFRESH:
-        response["HTTP_REFRESH_TOKEN_EXPIRATION"] = refresh_expires.timestamp()
-
 
 def is_refresh_token_expired(refresh_token: str, request: HttpRequest) -> bool:
     """
