@@ -112,13 +112,3 @@ class OAuth2LinksQuery(graphene.ObjectType):
         ),
         description="Retrieve OAuth2 authentication URLs for various providers",
     )
-
-    def resolve_o_auth2_links(self, info: graphene.ResolveInfo, **kwargs):
-        """
-        Resolver for the o_auth2_urls query field.
-
-        :param info: GraphQL query information
-        :param kwargs: Keyword arguments containing 'resource' and 'additional_state_payload'
-        :return: Dictionary containing the requested data
-        """
-        return kwargs
