@@ -18,7 +18,7 @@ Variables:
 """
 
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Optional, Tuple
 
 from django.http import HttpRequest, HttpResponse
 from graphql_jwt.refresh_token.shortcuts import create_refresh_token, get_refresh_token
@@ -38,7 +38,7 @@ def calculate_expiration(delta: timedelta) -> datetime:
     return datetime.utcnow() + delta
 
 
-def set_cookies(response: HttpResponse, user: Any) -> None:
+def set_cookies(response: HttpResponse, user: Any) -> Tuple[int, Optional[int]]:
     """
     Set JWT and refresh token cookies on the HttpResponse object with CSRF rotation.
 
@@ -46,6 +46,8 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
     :type response: HttpResponse
     :param user: User instance for generating JWT and refresh tokens.
     :type user: Any
+    :return A tuple containing the expiration timestamps of the tokens.
+    :rtypei Tuple[int, Optional[int]]
     """
     # JWT Token
     payload = jwt_payload(user)
@@ -69,6 +71,8 @@ def set_cookies(response: HttpResponse, user: Any) -> None:
             refresh_token_instance.get_token(),
             refresh_expires,
         )
+        return (jwt_expires, refresh_expires)
+    return (jwt_expires, None)
 
 
 def is_refresh_token_expired(refresh_token: str, request: HttpRequest) -> bool:
