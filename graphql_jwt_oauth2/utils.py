@@ -87,10 +87,10 @@ def set_cookies(
 
     if transfer_timestamps:
         query_params = {
-            "jwt_expires": jwt_expires,
+            "jwt_expires": jwt_expires.timestamp()
         }
         if jwt_settings.JWT_ALLOW_REFRESH:
-            query_params["refresh_expires"] = refresh_expires
+            query_params["refresh_expires"] = refresh_expires.timestamp()
         append_query_params(response, query_params)
 
 
